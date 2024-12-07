@@ -34,10 +34,32 @@
 
     function timeOutStart(){
         _timeout = setTimeout(() => {
-            _interval = setInterval(() =>{
+            _interval = setInterval(() =>
+            {
+                
+                // Использование:
+                const url = 'hhttps://telegram-bot-simple.onrender.com/health';
+                sendGetRequest(url);
+
                 rightButtonClick(0);
+
             }, 4000);
         }, 10000);
+    }
+
+
+    async function sendGetRequest(url) {
+        try {
+            const response = await fetch(url, { method: 'GET' });
+            if (response.ok) {
+                const data = await response.text(); // Получаем текст ответа
+                console.log('Response:', data);
+            } else {
+                console.error('Error:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Request failed:', error);
+        }
     }
 
     function leftButtonClick(isClearTimer){
